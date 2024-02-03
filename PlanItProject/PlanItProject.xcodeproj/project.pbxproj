@@ -7,18 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		892B56A18DE0F0A5C6FA5BEA /* Pods_PlanItProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023FBC48225217BE4091D144 /* Pods_PlanItProject.framework */; };
+		FA8D8C992B6CFA34004630D1 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D8C982B6CFA34004630D1 /* CellModel.swift */; };
+		FA8D8C9B2B6D0084004630D1 /* CustomItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D8C9A2B6D0084004630D1 /* CustomItemCell.swift */; };
 		FAD50A612B6A7DCF00285BB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD50A602B6A7DCF00285BB3 /* AppDelegate.swift */; };
 		FAD50A632B6A7DCF00285BB3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD50A622B6A7DCF00285BB3 /* SceneDelegate.swift */; };
-		FAD50A652B6A7DCF00285BB3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD50A642B6A7DCF00285BB3 /* ViewController.swift */; };
+		FAD50A652B6A7DCF00285BB3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD50A642B6A7DCF00285BB3 /* MainViewController.swift */; };
 		FAD50A6A2B6A7DD100285BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD50A692B6A7DD100285BB3 /* Assets.xcassets */; };
 		FAD50A6D2B6A7DD100285BB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD50A6B2B6A7DD100285BB3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		023FBC48225217BE4091D144 /* Pods_PlanItProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanItProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E4335286C6234C59B3C2478 /* Pods-PlanItProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanItProject.debug.xcconfig"; path = "Target Support Files/Pods-PlanItProject/Pods-PlanItProject.debug.xcconfig"; sourceTree = "<group>"; };
+		74E9E24529C4EE2048D02775 /* Pods-PlanItProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanItProject.release.xcconfig"; path = "Target Support Files/Pods-PlanItProject/Pods-PlanItProject.release.xcconfig"; sourceTree = "<group>"; };
+		FA8D8C982B6CFA34004630D1 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		FA8D8C9A2B6D0084004630D1 /* CustomItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomItemCell.swift; sourceTree = "<group>"; };
 		FAD50A5D2B6A7DCF00285BB3 /* PlanItProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanItProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD50A602B6A7DCF00285BB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD50A622B6A7DCF00285BB3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FAD50A642B6A7DCF00285BB3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAD50A642B6A7DCF00285BB3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FAD50A692B6A7DD100285BB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD50A6C2B6A7DD100285BB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAD50A6E2B6A7DD100285BB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -29,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				892B56A18DE0F0A5C6FA5BEA /* Pods_PlanItProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		548385765D5657E849905C45 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E4335286C6234C59B3C2478 /* Pods-PlanItProject.debug.xcconfig */,
+				74E9E24529C4EE2048D02775 /* Pods-PlanItProject.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BD5509598A3776A4CF8ADD53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				023FBC48225217BE4091D144 /* Pods_PlanItProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FAD50A542B6A7DCF00285BB3 = {
 			isa = PBXGroup;
 			children = (
 				FAD50A5F2B6A7DCF00285BB3 /* PlanItProject */,
 				FAD50A5E2B6A7DCF00285BB3 /* Products */,
+				548385765D5657E849905C45 /* Pods */,
+				BD5509598A3776A4CF8ADD53 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,7 +84,9 @@
 			children = (
 				FAD50A602B6A7DCF00285BB3 /* AppDelegate.swift */,
 				FAD50A622B6A7DCF00285BB3 /* SceneDelegate.swift */,
-				FAD50A642B6A7DCF00285BB3 /* ViewController.swift */,
+				FAD50A642B6A7DCF00285BB3 /* MainViewController.swift */,
+				FA8D8C9A2B6D0084004630D1 /* CustomItemCell.swift */,
+				FA8D8C982B6CFA34004630D1 /* CellModel.swift */,
 				FAD50A692B6A7DD100285BB3 /* Assets.xcassets */,
 				FAD50A6B2B6A7DD100285BB3 /* LaunchScreen.storyboard */,
 				FAD50A6E2B6A7DD100285BB3 /* Info.plist */,
@@ -71,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAD50A712B6A7DD100285BB3 /* Build configuration list for PBXNativeTarget "PlanItProject" */;
 			buildPhases = (
+				488638EBE806BABBDD4FF6E4 /* [CP] Check Pods Manifest.lock */,
 				FAD50A592B6A7DCF00285BB3 /* Sources */,
 				FAD50A5A2B6A7DCF00285BB3 /* Frameworks */,
 				FAD50A5B2B6A7DCF00285BB3 /* Resources */,
+				F468948DCD0270598DB4A797 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,14 +161,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		488638EBE806BABBDD4FF6E4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlanItProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F468948DCD0270598DB4A797 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanItProject/Pods-PlanItProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanItProject/Pods-PlanItProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlanItProject/Pods-PlanItProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FAD50A592B6A7DCF00285BB3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAD50A652B6A7DCF00285BB3 /* ViewController.swift in Sources */,
+				FA8D8C9B2B6D0084004630D1 /* CustomItemCell.swift in Sources */,
+				FAD50A652B6A7DCF00285BB3 /* MainViewController.swift in Sources */,
 				FAD50A612B6A7DCF00285BB3 /* AppDelegate.swift in Sources */,
 				FAD50A632B6A7DCF00285BB3 /* SceneDelegate.swift in Sources */,
+				FA8D8C992B6CFA34004630D1 /* CellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,7 +267,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -254,7 +330,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -275,6 +351,7 @@
 		};
 		FAD50A722B6A7DD100285BB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E4335286C6234C59B3C2478 /* Pods-PlanItProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +379,7 @@
 		};
 		FAD50A732B6A7DD100285BB3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74E9E24529C4EE2048D02775 /* Pods-PlanItProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
