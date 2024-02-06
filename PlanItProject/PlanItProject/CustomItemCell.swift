@@ -29,7 +29,7 @@ class CustomItemCell: UICollectionViewCell {
         return stackView
     }()
     
-    private lazy var topContainer: UIView = {
+    lazy var topContainer: UIView = {
         var topContainer = UIView()
         topContainer.backgroundColor = UIColor(red: 51/255, green: 62/255, blue: 73/255, alpha: 1)
         topContainer.layer.cornerRadius = 10
@@ -39,7 +39,7 @@ class CustomItemCell: UICollectionViewCell {
         return topContainer
     }()
     
-    private lazy var bottomContainer: UIView = {
+    lazy var bottomContainer: UIView = {
         var bottomContainer = UIView()
         bottomContainer.backgroundColor = UIColor(red: 51/255, green: 62/255, blue: 73/255, alpha: 1)
         bottomContainer.layer.cornerRadius = 10
@@ -49,10 +49,9 @@ class CustomItemCell: UICollectionViewCell {
         return bottomContainer
     }()
     
-    private lazy var checkButton: UIButton = {
+    lazy var checkButton: UIButton = {
         var checkButton = UIButton()
         checkButton.setImage(UIImage(named: "checked-data 1"), for: .normal)
-        checkButton.setImage(UIImage(named: "Component 1"), for: .focused)
         checkButton.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
         checkButton.addTarget(self, action: #selector(checkButtonAction), for: .touchUpInside)
         
@@ -61,7 +60,7 @@ class CustomItemCell: UICollectionViewCell {
         return checkButton
     }()
     
-    private lazy var editButton: UIButton = {
+    lazy var editButton: UIButton = {
         var editButton = UIButton()
         editButton.setImage(UIImage(named: "edit"), for: .normal)
         
@@ -70,7 +69,7 @@ class CustomItemCell: UICollectionViewCell {
         return editButton
     }()
     
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         var nameLabel = UILabel()
         nameLabel.text = "Test"
         nameLabel.font = UIFont(name: "Montserrat", size: 12)
@@ -81,7 +80,7 @@ class CustomItemCell: UICollectionViewCell {
         return nameLabel
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    lazy var descriptionLabel: UILabel = {
         var descriptionLabel = UILabel()
         descriptionLabel.text = "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"
         descriptionLabel.font = UIFont(name: "Montserrat", size: 12)
@@ -122,10 +121,16 @@ class CustomItemCell: UICollectionViewCell {
         }
     }
     
-    @objc func checkButtonAction() {
-        if checkButton.isSelected {
-//            checkButton.setImage(UIImage(named: "Component 1"), for: .selected)
-        }
+    @objc func checkButtonAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+            
+            if !sender.isSelected {
+                // Если кнопка нажата, показываем изображение для состояния selected
+                sender.setImage(UIImage(named: "Component 1"), for: .normal)
+            } else {
+                // Если кнопка не нажата, показываем изображение для состояния normal
+                sender.setImage(UIImage(named: "checked-data 1"), for: .normal)
+            }
     }
     
     func configureStackView() {

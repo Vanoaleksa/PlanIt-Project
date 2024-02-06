@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     private lazy var headerImageView: UIImageView = {
         let headerImageView = UIImageView()
         headerImageView.image = UIImage(named: "Rectangle 1")
+        
         view.addSubview(headerImageView)
         
         return headerImageView
@@ -44,12 +45,13 @@ class MainViewController: UIViewController {
         layout.scrollDirection = .vertical
         
         let collectionView = UICollectionView( frame: .zero, collectionViewLayout: layout)
-        collectionView.showsVerticalScrollIndicator = true
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsMultipleSelection = true
         collectionView.alwaysBounceVertical = true
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
+        
         
         view.addSubview(collectionView)
         
@@ -65,7 +67,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         configUI()
         setupLayout()
     }
@@ -73,10 +74,8 @@ class MainViewController: UIViewController {
     func configUI() {
         
         self.view.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
-        
+
         collectionView.register(CustomItemCell.self, forCellWithReuseIdentifier: "\(CustomItemCell.self)")
-        
-        
     }
     
     func setupLayout() {
@@ -117,6 +116,10 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CustomItemCell.self)",
                                                       for: indexPath) as! CustomItemCell
+        
+        let item = items[indexPath.item]
+        cell.nameLabel.text = item.title
+        cell.descriptionLabel.text = item.description
         
         return cell
     }
