@@ -122,14 +122,16 @@ class CustomItemCell: UICollectionViewCell {
     }
     
     @objc func checkButtonAction(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-            
+        
             if !sender.isSelected {
                 // Если кнопка нажата, показываем изображение для состояния selected
-                sender.setImage(UIImage(named: "Component 1"), for: .normal)
+                sender.setImage(UIImage(named: "Checked"), for: .normal )
+                sender.isSelected = !sender.isSelected
             } else {
                 // Если кнопка не нажата, показываем изображение для состояния normal
-                sender.setImage(UIImage(named: "checked-data 1"), for: .normal)
+                sender.isSelected = !sender.isSelected
+                sender.setImage(UIImage(named: "Unchecked"), for: .normal)
+                
             }
     }
     

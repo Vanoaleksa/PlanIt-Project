@@ -10,6 +10,12 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var items = [
+        Item(id: 0, title: "Test title", description: "Test desription"),
+        Item(id: 1, title: "Test 22", description: "Test 222222"),
+        Item(id: 2, title: "Test 33", description: "Test 333333333")
+    ]
+    
     private lazy var headerImageView: UIImageView = {
         let headerImageView = UIImageView()
         headerImageView.image = UIImage(named: "Rectangle 1")
@@ -58,11 +64,27 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
-    var items = [
-        Item(id: 0, title: "Test title", description: "Test desription"),
-        Item(id: 1, title: "Test 22", description: "Test 222222"),
-        Item(id: 2, title: "Test 33", description: "Test 333333333")
-    ]
+    private lazy var addNewItemButton: UIButton = {
+        var addNewItemButton = UIButton()
+        addNewItemButton.setImage(UIImage(named: "AddButton"), for: .normal)
+        addNewItemButton.addTarget(self, action: #selector(addNewItem), for: .touchUpInside)
+
+        
+        view.addSubview(addNewItemButton)
+        
+        return addNewItemButton
+    }()
+    
+    private lazy var coffeButton: UIButton = {
+        var coffeButton = UIButton()
+        coffeButton.setImage(UIImage(named: "CoffeButton"), for: .normal)
+        
+        view.addSubview(coffeButton)
+        
+        return coffeButton
+    }()
+    
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +96,17 @@ class MainViewController: UIViewController {
     func configUI() {
         
         self.view.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
+        self.navigationController?.navigationBar.isHidden = true
 
         collectionView.register(CustomItemCell.self, forCellWithReuseIdentifier: "\(CustomItemCell.self)")
+    }
+    
+    @objc func addNewItem() {
+        
+        let nextVC = NewItemViewController()
+        nextVC.delegate = self
+        
+        present(nextVC, animated: true)
     }
     
     func setupLayout() {
@@ -105,6 +136,18 @@ class MainViewController: UIViewController {
             make.left.equalToSuperview()
             make.bottom.equalToSuperview().offset(-100)
         }
+        
+        addNewItemButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.height.equalTo(55)
+        }
+        
+        coffeButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.height.equalTo(55)
+        }
     }
 }
 
@@ -117,9 +160,10 @@ extension MainViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CustomItemCell.self)",
                                                       for: indexPath) as! CustomItemCell
         
-        let item = items[indexPath.item]
+        var item = items[indexPath.item]
         cell.nameLabel.text = item.title
         cell.descriptionLabel.text = item.description
+        item.id = indexPath.row
         
         return cell
     }
@@ -154,6 +198,25 @@ extension MainViewController: UICollectionViewDelegate {
         collectionView.performBatchUpdates(nil)
         
         return true
+    }
+}
+
+extension MainViewController: NewItemDelegate {
+//MARK: - Получаем данные нового item
+    func didAddNewItem(_ item: Item) {
+        items.append(item)
+      
+        collectionView.reloadData()
+        
+        // Получаем все видимые ячейки в UICollectionView
+        let visibleCells = collectionView.visibleCells
+        
+        // Перебираем все видимые ячейки и снимаем с них выделение
+        for cell in visibleCells {
+            if let indexPath = collectionView.indexPath(for: cell) {
+                collectionView.deselectItem(at: indexPath, animated: false)
+            }
+        }
     }
 }
 
