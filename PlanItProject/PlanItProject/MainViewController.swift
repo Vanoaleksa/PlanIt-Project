@@ -7,14 +7,13 @@
 
 import SnapKit
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
     
-    var items = [
-        Item(id: 0, title: "Test title", description: "Test desription"),
-        Item(id: 1, title: "Test 22", description: "Test 222222"),
-        Item(id: 2, title: "Test 33", description: "Test 333333333")
-    ]
+    let sizingCell = CustomItemCell()
+    
+    var items: Results<Item>!
     
     private lazy var headerImageView: UIImageView = {
         let headerImageView = UIImageView()
@@ -89,6 +88,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        items = realm.objects(Item.self)
         configUI()
         setupLayout()
     }
@@ -153,27 +153,33 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        items.count
+        return items.isEmpty ? 0 : items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CustomItemCell.self)",
                                                       for: indexPath) as! CustomItemCell
         
-        var item = items[indexPath.item]
+//        var item = Item()
+        
+        let item = items[indexPath.row]
         cell.nameLabel.text = item.title
-        cell.descriptionLabel.text = item.description
-        item.id = indexPath.row
+        cell.descriptionLabel.text = item.descriptionItem
+        cell.isSelected = false
+//        item.id = index(ofAccessibilityElement: item)
         
         return cell
     }
+    
 }
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let isSelected = collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false
+        
         return CGSize(width: collectionView.bounds.width - 20, height: isSelected ? 210 : 45)
     }
     
@@ -183,6 +189,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         12
     }
 }
+
 
 extension MainViewController: UICollectionViewDelegate {
     
@@ -199,24 +206,16 @@ extension MainViewController: UICollectionViewDelegate {
         
         return true
     }
+    
 }
 
 extension MainViewController: NewItemDelegate {
 //MARK: - Получаем данные нового item
     func didAddNewItem(_ item: Item) {
-        items.append(item)
-      
+        
+//        items.append(item)
         collectionView.reloadData()
-        
-        // Получаем все видимые ячейки в UICollectionView
-        let visibleCells = collectionView.visibleCells
-        
-        // Перебираем все видимые ячейки и снимаем с них выделение
-        for cell in visibleCells {
-            if let indexPath = collectionView.indexPath(for: cell) {
-                collectionView.deselectItem(at: indexPath, animated: false)
-            }
-        }
+//        print("Items:", items)
     }
 }
 

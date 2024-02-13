@@ -10,7 +10,7 @@ import UIKit
 
 class NewItemViewController: UIViewController {
     
-    var newItem: Item?
+//    var newItem = Item()
     weak var delegate: NewItemDelegate?
     
     lazy var headerLabel: UILabel = {
@@ -99,9 +99,12 @@ class NewItemViewController: UIViewController {
     }
     
     @objc func saveButtonAction() {
-        newItem = Item(id: 0, title: nameTextfield.text!, description: descriptionTextView.text)
         
-        delegate?.didAddNewItem(newItem!)
+        let newItem = Item(id: 0, title: nameTextfield.text!, descriptionItem: descriptionTextView.text)
+
+        StorageManager.saveObject(newItem)
+        
+        delegate?.didAddNewItem(newItem)
         dismiss(animated: true)
     }
     
@@ -162,12 +165,6 @@ extension NewItemViewController: UITextViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.descriptionTextView.resignFirstResponder()
     }
-        
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        textView.resignFirstResponder()
-//        
-//        return true
-//    }
 }
 
 extension NewItemViewController: UITextFieldDelegate {

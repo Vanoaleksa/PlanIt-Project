@@ -82,7 +82,6 @@ class CustomItemCell: UICollectionViewCell {
     
     lazy var descriptionLabel: UILabel = {
         var descriptionLabel = UILabel()
-        descriptionLabel.text = "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"
         descriptionLabel.font = UIFont(name: "Montserrat", size: 12)
         descriptionLabel.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         descriptionLabel.numberOfLines = 0
@@ -104,19 +103,21 @@ class CustomItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
         
     func updateAppearance() {
-    //Выключаем констрейнты если ячейка selected
+    //Выключаем констрейнты если ячейка не выбрана
         
         UIView.animate(withDuration: 0.3) {
             if self.isSelected {
-                self.bottomContainer.snp.removeConstraints()
-                self.descriptionLabel.isHidden = false
-                self.layoutIfNeeded()
-            } else {
                 UIView.animate(withDuration: 0.3) {
-                    self.descriptionLabel.isHidden = true
+                    self.descriptionLabel.isHidden = false
+                    self.layoutIfNeeded()
                 }
+            } else {
+                self.bottomContainer.snp.removeConstraints()
+                self.descriptionLabel.isHidden = true
+                self.layoutIfNeeded()
             }
         }
     }
@@ -124,11 +125,11 @@ class CustomItemCell: UICollectionViewCell {
     @objc func checkButtonAction(_ sender: UIButton) {
         
             if !sender.isSelected {
-                // Если кнопка нажата, показываем изображение для состояния selected
+                // Если кнопка нажата, показываем изображение с галочкой
                 sender.setImage(UIImage(named: "Checked"), for: .normal )
                 sender.isSelected = !sender.isSelected
             } else {
-                // Если кнопка не нажата, показываем изображение для состояния normal
+                // Если кнопка не нажата, показываем изображение без галочки
                 sender.isSelected = !sender.isSelected
                 sender.setImage(UIImage(named: "Unchecked"), for: .normal)
                 
