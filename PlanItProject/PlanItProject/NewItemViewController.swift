@@ -100,10 +100,13 @@ class NewItemViewController: UIViewController {
     
     @objc func saveButtonAction() {
         
-        let newItem = Item(id: 0, title: nameTextfield.text!, descriptionItem: descriptionTextView.text)
-
-        StorageManager.saveObject(newItem)
+//        let newItem = Item(_id: _id, title: nameTextfield.text!, descriptionItem: descriptionTextView.text)
+        let newItem = Item()
+        newItem.title = nameTextfield.text!
+        newItem.descriptionItem = descriptionTextView.text
         
+        StorageManager.saveObject(newItem)
+                
         delegate?.didAddNewItem(newItem)
         dismiss(animated: true)
     }

@@ -8,18 +8,12 @@
 import RealmSwift
 import UIKit
 
-class Item: Object {
+class Item: Object, ObjectKeyIdentifiable {
     
-    @Persisted var id: Int
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var title: String
     @Persisted var descriptionItem: String
-    
-    convenience init(id: Int, title: String, descriptionItem: String) {
-        self.init()
-        self.id = id
-        self.title = title
-        self.descriptionItem = descriptionItem
-    }
+    @Persisted var checked: Bool = false
 }
 
 

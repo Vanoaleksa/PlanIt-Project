@@ -160,17 +160,17 @@ extension MainViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CustomItemCell.self)",
                                                       for: indexPath) as! CustomItemCell
         
-//        var item = Item()
-        
         let item = items[indexPath.row]
         cell.nameLabel.text = item.title
         cell.descriptionLabel.text = item.descriptionItem
         cell.isSelected = false
-//        item.id = index(ofAccessibilityElement: item)
         
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
+        swipeGesture.direction = .left
+        cell.addGestureRecognizer(swipeGesture)
+
         return cell
     }
-    
 }
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
@@ -207,15 +207,22 @@ extension MainViewController: UICollectionViewDelegate {
         return true
     }
     
+    //MARK: - Swipe to delete cell
+    @objc func handleSwipeGesture(sender: UISwipeGestureRecognizer) {
+        if let cell = sender.view as? CustomItemCell {
+            if let indexPath = collectionView.indexPath(for: cell){
+                StorageManager.deleteObject(items[indexPath.row])
+                collectionView.deleteItems(at: [indexPath])
+            }
+        }
+    }
 }
 
 extension MainViewController: NewItemDelegate {
 //MARK: - Получаем данные нового item
     func didAddNewItem(_ item: Item) {
         
-//        items.append(item)
         collectionView.reloadData()
-//        print("Items:", items)
     }
 }
 
