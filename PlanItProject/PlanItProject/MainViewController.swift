@@ -164,6 +164,13 @@ extension MainViewController: UICollectionViewDataSource {
         cell.nameLabel.text = item.title
         cell.descriptionLabel.text = item.descriptionItem
         cell.isSelected = false
+        cell.currentItem = item
+        
+        if item.checked {
+            cell.isChecked = true
+        } else {
+            cell.isChecked = false
+        }
         
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
         swipeGesture.direction = .left

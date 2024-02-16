@@ -7,12 +7,19 @@
 
 import UIKit
 import SnapKit
-
+import RealmSwift
 
 class CustomItemCell: UICollectionViewCell {
     
+    var currentItem: Item?
+    
     // Меняем режим отображения по клику
     override var isSelected: Bool {
+        didSet {
+            updateAppearance()
+        }
+    }
+    var isChecked = false {
         didSet {
             updateAppearance()
         }
@@ -51,9 +58,9 @@ class CustomItemCell: UICollectionViewCell {
     
     lazy var checkButton: UIButton = {
         var checkButton = UIButton()
-        checkButton.setImage(UIImage(named: "checked-data 1"), for: .normal)
         checkButton.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
         checkButton.addTarget(self, action: #selector(checkButtonAction), for: .touchUpInside)
+        
         
         topContainer.addSubview(checkButton)
         
@@ -120,19 +127,29 @@ class CustomItemCell: UICollectionViewCell {
                 self.layoutIfNeeded()
             }
         }
+        
+        if isChecked {
+            checkButton.setImage(UIImage(named: "Checked"), for: .normal)
+        } else {
+            checkButton.setImage(UIImage(named: "Unchecked"), for: .normal)
+        }
+        
     }
     
-    @objc func checkButtonAction(_ sender: UIButton) {
+    @objc func checkButtonAction(_ sender: UIButton, item: Item) {
+
+        guard currentItem != nil else {return}
         
-            if !sender.isSelected {
-                // Если кнопка нажата, показываем изображение с галочкой
-                sender.setImage(UIImage(named: "Checked"), for: .normal )
-                sender.isSelected = !sender.isSelected
+        if !currentItem!.checked{
+            isChecked = true
+                try! realm.write({
+                    currentItem!.checked = true
+                })
             } else {
-                // Если кнопка не нажата, показываем изображение без галочки
-                sender.isSelected = !sender.isSelected
-                sender.setImage(UIImage(named: "Unchecked"), for: .normal)
-                
+                isChecked = false
+                try! realm.write({
+                    currentItem!.checked = false
+                })
             }
     }
     
