@@ -10,9 +10,7 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UIViewController {
-    
-    let sizingCell = CustomItemCell()
-    
+        
     var items: Results<Item>!
     
     private lazy var headerImageView: UIImageView = {
@@ -108,47 +106,6 @@ class MainViewController: UIViewController {
         
         present(nextVC, animated: true)
     }
-    
-    func setupLayout() {
-        
-        headerImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.right.equalToSuperview()
-            make.left.equalToSuperview()
-            make.height.equalTo(210)
-        }
-        
-        secondHeaderImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.right.equalToSuperview()
-            make.left.equalToSuperview()
-            make.height.equalTo(210)
-        }
-        
-        headerLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-20)
-            make.bottom.equalTo(headerImageView.snp_bottomMargin)
-        }
-        
-        collectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(210)
-            make.right.equalToSuperview()
-            make.left.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-100)
-        }
-        
-        addNewItemButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-20)
-            make.width.height.equalTo(55)
-        }
-        
-        coffeButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
-            make.bottom.equalToSuperview().offset(-20)
-            make.width.height.equalTo(55)
-        }
-    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -161,10 +118,12 @@ extension MainViewController: UICollectionViewDataSource {
                                                       for: indexPath) as! CustomItemCell
         
         let item = items[indexPath.row]
+        
         cell.nameLabel.text = item.title
         cell.descriptionLabel.text = item.descriptionItem
         cell.isSelected = false
         cell.currentItem = item
+        cell.mainVC = self
         
         if item.checked {
             cell.isChecked = true
@@ -230,6 +189,50 @@ extension MainViewController: NewItemDelegate {
     func didAddNewItem(_ item: Item) {
         
         collectionView.reloadData()
+    }
+}
+
+//MARK: - Constraints
+extension MainViewController {
+    func setupLayout() {
+        
+        headerImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.right.equalToSuperview()
+            make.left.equalToSuperview()
+            make.height.equalTo(210)
+        }
+        
+        secondHeaderImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.right.equalToSuperview()
+            make.left.equalToSuperview()
+            make.height.equalTo(210)
+        }
+        
+        headerLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalTo(headerImageView.snp_bottomMargin)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(210)
+            make.right.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-100)
+        }
+        
+        addNewItemButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.height.equalTo(55)
+        }
+        
+        coffeButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.height.equalTo(55)
+        }
     }
 }
 

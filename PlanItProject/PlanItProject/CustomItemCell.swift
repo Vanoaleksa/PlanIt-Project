@@ -12,6 +12,7 @@ import RealmSwift
 class CustomItemCell: UICollectionViewCell {
     
     var currentItem: Item?
+    weak var mainVC: UIViewController?
     
     // Меняем режим отображения по клику
     override var isSelected: Bool {
@@ -19,6 +20,7 @@ class CustomItemCell: UICollectionViewCell {
             updateAppearance()
         }
     }
+    
     var isChecked = false {
         didSet {
             updateAppearance()
@@ -70,6 +72,7 @@ class CustomItemCell: UICollectionViewCell {
     lazy var editButton: UIButton = {
         var editButton = UIButton()
         editButton.setImage(UIImage(named: "edit"), for: .normal)
+        editButton.addTarget(self, action: #selector(editButtonAction), for: .touchUpInside)
         
         topContainer.addSubview(editButton)
         
@@ -103,15 +106,12 @@ class CustomItemCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupLayout()
-        configureStackView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-        
     func updateAppearance() {
     //Выключаем констрейнты если ячейка не выбрана
         
@@ -127,7 +127,7 @@ class CustomItemCell: UICollectionViewCell {
                 self.layoutIfNeeded()
             }
         }
-        
+    //Изменяем чекбокс по клику
         if isChecked {
             checkButton.setImage(UIImage(named: "Checked"), for: .normal)
         } else {
@@ -139,7 +139,7 @@ class CustomItemCell: UICollectionViewCell {
     @objc func checkButtonAction(_ sender: UIButton, item: Item) {
 
         guard currentItem != nil else {return}
-        
+                
         if !currentItem!.checked{
             isChecked = true
                 try! realm.write({
@@ -153,8 +153,13 @@ class CustomItemCell: UICollectionViewCell {
             }
     }
     
-    func configureStackView() {
+    @objc func editButtonAction() {
+        let nextVC = NewItemViewController()
         
+        nextVC.currentItem = currentItem
+        nextVC.delegate = (mainVC as! any NewItemDelegate)
+
+        mainVC!.present(nextVC, animated: true)
     }
 
     func setupLayout() {
@@ -199,3 +204,5 @@ class CustomItemCell: UICollectionViewCell {
         }
     }
 }
+
+

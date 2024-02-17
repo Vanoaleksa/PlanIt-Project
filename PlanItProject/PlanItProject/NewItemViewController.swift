@@ -10,8 +10,8 @@ import UIKit
 
 class NewItemViewController: UIViewController {
     
-//    var newItem = Item()
     weak var delegate: NewItemDelegate?
+    var currentItem: Item?
     
     lazy var headerLabel: UILabel = {
         var headerLabel = UILabel()
@@ -74,7 +74,11 @@ class NewItemViewController: UIViewController {
         var saveButton = UIButton()
         saveButton.setImage(UIImage(named: "Save"), for: .normal)
         saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
-        saveButton.isEnabled = false
+        if currentItem != nil {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
         
         view.addSubview(saveButton)
         
@@ -92,6 +96,13 @@ class NewItemViewController: UIViewController {
     func configUI() {
         
         view.backgroundColor = UIColor(red: 51/255, green: 62/255, blue: 73/255, alpha: 1)
+        
+        guard let item = currentItem else { return }
+//        saveButton.isEnabled = true
+        
+        nameTextfield.text = item.title
+        descriptionTextView.text = item.descriptionItem
+        
     }
     
     func configureNavBar() {
@@ -104,9 +115,19 @@ class NewItemViewController: UIViewController {
         newItem.title = nameTextfield.text!
         newItem.descriptionItem = descriptionTextView.text
         
-        StorageManager.saveObject(newItem)
-                
-        delegate?.didAddNewItem(newItem)
+        if currentItem != nil {
+            
+            try! realm.write({
+                currentItem?.title = nameTextfield.text!
+                currentItem?.descriptionItem = descriptionTextView.text
+            })
+            delegate?.didAddNewItem(newItem)
+
+        } else {
+            StorageManager.saveObject(newItem)
+            delegate?.didAddNewItem(newItem)
+        }
+        
         dismiss(animated: true)
     }
     
@@ -114,6 +135,50 @@ class NewItemViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    
+}
+
+extension NewItemViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if descriptionTextView.textColor == UIColor.lightGray {
+            descriptionTextView.textColor = UIColor.white
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if descriptionTextView.text.isEmpty {
+            descriptionTextView.text = "Desciption.."
+            descriptionTextView.textColor = .lightGray
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.descriptionTextView.resignFirstResponder()
+    }
+}
+
+extension NewItemViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    @objc func textFieldChanged() {
+        if nameTextfield.text?.isEmpty == false  {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
+}
+
+protocol NewItemDelegate: NSObject {
+    func didAddNewItem(_ item: Item)
+}
+
+//MARK: - Constraints
+extension NewItemViewController {
     func setupLayout() {
         
         headerLabel.snp.makeConstraints { make in
@@ -147,44 +212,4 @@ class NewItemViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-30)
         }
     }
-}
-
-extension NewItemViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if descriptionTextView.textColor == UIColor.lightGray {
-            descriptionTextView.text = nil
-            descriptionTextView.textColor = UIColor.white
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if descriptionTextView.text.isEmpty {
-            descriptionTextView.text = "Desciption.."
-            descriptionTextView.textColor = .lightGray
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.descriptionTextView.resignFirstResponder()
-    }
-}
-
-extension NewItemViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        return true
-    }
-    
-    @objc func textFieldChanged() {
-        if nameTextfield.text?.isEmpty == false {
-            saveButton.isEnabled = true
-        } else {
-            saveButton.isEnabled = false
-        }
-    }
-}
-
-protocol NewItemDelegate: NSObject {
-    func didAddNewItem(_ item: Item)
 }
