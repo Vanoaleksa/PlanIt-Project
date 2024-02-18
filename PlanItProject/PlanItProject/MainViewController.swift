@@ -55,7 +55,6 @@ class MainViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
         
-        
         view.addSubview(collectionView)
         
         return collectionView
@@ -75,13 +74,22 @@ class MainViewController: UIViewController {
     private lazy var coffeButton: UIButton = {
         var coffeButton = UIButton()
         coffeButton.setImage(UIImage(named: "CoffeButton"), for: .normal)
+        coffeButton.addTarget(self, action: #selector(coffeButtonAction), for: .touchUpInside)
         
         view.addSubview(coffeButton)
         
         return coffeButton
     }()
     
-   
+    private lazy var coffeRatingView: UIView = {
+        var coffeView = CoffeControlView()
+        coffeView.isHidden = true
+        coffeView.moveBackButton.addTarget(self, action: #selector(moveBackButtonAction), for: .touchUpInside)
+        
+        self.view.addSubview(coffeView)
+        
+        return coffeView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +113,24 @@ class MainViewController: UIViewController {
         nextVC.delegate = self
         
         present(nextVC, animated: true)
+    }
+    
+    @objc func coffeButtonAction() {
+        
+        collectionView.isHidden = true
+        coffeRatingView.isHidden = false
+        addNewItemButton.isHidden = true
+        coffeButton.isHidden = true
+        view.backgroundColor = UIColor(red: 51/255, green: 62/255, blue: 73/255, alpha: 1)
+    }
+    
+    @objc func moveBackButtonAction() {
+        
+        collectionView.isHidden = false
+        coffeRatingView.isHidden = true
+        addNewItemButton.isHidden = false
+        coffeButton.isHidden = false
+        view.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
     }
 }
 
@@ -216,6 +242,13 @@ extension MainViewController {
         }
         
         collectionView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(210)
+            make.right.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-100)
+        }
+        
+        coffeRatingView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(210)
             make.right.equalToSuperview()
             make.left.equalToSuperview()

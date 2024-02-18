@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		892B56A18DE0F0A5C6FA5BEA /* Pods_PlanItProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023FBC48225217BE4091D144 /* Pods_PlanItProject.framework */; };
+		FA04646B2B822F6F003B6CEE /* CoffeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04646A2B822F6F003B6CEE /* CoffeControlView.swift */; };
 		FA8D8C992B6CFA34004630D1 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D8C982B6CFA34004630D1 /* CellModel.swift */; };
 		FA8D8C9B2B6D0084004630D1 /* CustomItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D8C9A2B6D0084004630D1 /* CustomItemCell.swift */; };
 		FAA1AE2D2B724D4200273ABF /* NewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1AE2C2B724D4200273ABF /* NewItemViewController.swift */; };
@@ -25,6 +26,7 @@
 		023FBC48225217BE4091D144 /* Pods_PlanItProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanItProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E4335286C6234C59B3C2478 /* Pods-PlanItProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanItProject.debug.xcconfig"; path = "Target Support Files/Pods-PlanItProject/Pods-PlanItProject.debug.xcconfig"; sourceTree = "<group>"; };
 		74E9E24529C4EE2048D02775 /* Pods-PlanItProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanItProject.release.xcconfig"; path = "Target Support Files/Pods-PlanItProject/Pods-PlanItProject.release.xcconfig"; sourceTree = "<group>"; };
+		FA04646A2B822F6F003B6CEE /* CoffeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeControlView.swift; sourceTree = "<group>"; };
 		FA8D8C982B6CFA34004630D1 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		FA8D8C9A2B6D0084004630D1 /* CustomItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomItemCell.swift; sourceTree = "<group>"; };
 		FAA1AE2C2B724D4200273ABF /* NewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				FAD50A622B6A7DCF00285BB3 /* SceneDelegate.swift */,
 				FAD50A642B6A7DCF00285BB3 /* MainViewController.swift */,
 				FAA1AE2C2B724D4200273ABF /* NewItemViewController.swift */,
+				FA04646A2B822F6F003B6CEE /* CoffeControlView.swift */,
 				FA8D8C9A2B6D0084004630D1 /* CustomItemCell.swift */,
 				FA8D8C982B6CFA34004630D1 /* CellModel.swift */,
 				FAAE631D2B7BB4CF007234A5 /* StorageManager.swift */,
@@ -225,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA04646B2B822F6F003B6CEE /* CoffeControlView.swift in Sources */,
 				FA8D8C9B2B6D0084004630D1 /* CustomItemCell.swift in Sources */,
 				FAD50A652B6A7DCF00285BB3 /* MainViewController.swift in Sources */,
 				FAA1AE2D2B724D4200273ABF /* NewItemViewController.swift in Sources */,

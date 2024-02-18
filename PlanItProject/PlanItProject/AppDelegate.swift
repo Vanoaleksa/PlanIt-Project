@@ -18,7 +18,7 @@ import RealmSwift
             schemaVersion: 4)
         // Use this configuration when opening realms
         Realm.Configuration.defaultConfiguration = config
-        let realm = try! Realm()
+        _ = try! Realm()
         
         return true
     }
