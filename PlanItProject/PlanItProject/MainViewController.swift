@@ -121,6 +121,7 @@ class MainViewController: UIViewController {
         coffeRatingView.isHidden = false
         addNewItemButton.isHidden = true
         coffeButton.isHidden = true
+        headerLabel.isHidden = true
         view.backgroundColor = UIColor(red: 51/255, green: 62/255, blue: 73/255, alpha: 1)
     }
     
@@ -130,6 +131,7 @@ class MainViewController: UIViewController {
         coffeRatingView.isHidden = true
         addNewItemButton.isHidden = false
         coffeButton.isHidden = false
+        headerLabel.isHidden = false
         view.backgroundColor = UIColor(red: 40/255, green: 49/255, blue: 58/255, alpha: 1)
     }
 }
